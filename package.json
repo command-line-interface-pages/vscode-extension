@@ -1,0 +1,25 @@
+{
+  "name": "better-tldr-ide",
+  "displayName": "Better TlDr IDE",
+  "description": "Extension to provide IDE-like features for editing Better TlDr pages",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "btldr",
+      "aliases": ["Better TlDr", "btldr"],
+      "extensions": ["btldr"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "btldr",
+      "scopeName": "source.btldr",
+      "path": "./syntaxes/btldr.tmLanguage.json"
+    }]
+  }
+}
