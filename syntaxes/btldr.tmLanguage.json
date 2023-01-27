@@ -3,27 +3,93 @@
 	"name": "Better TlDr",
 	"patterns": [
 		{
-			"include": "#keywords"
+			"include": "#heading"
 		},
 		{
-			"include": "#strings"
+			"include": "#summary"
+		},
+		{
+			"include": "#example-description"
+		},
+		{
+			"include": "#example-code"
 		}
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.btldr",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
+		"command": {
+			"name": "entity.name.function.btldr",
+			"match": "[^ ]+"
 		},
-		"strings": {
+		"heading": {
 			"name": "string.quoted.double.btldr",
-			"begin": "\"",
-			"end": "\"",
+			"begin": "^# ",
+			"end": "$",
 			"patterns": [
 				{
-					"name": "constant.character.escape.btldr",
-					"match": "\\\\."
+					"include": "#command"
+				}
+			]
+		},
+		"summary": {
+			"name": "string.quoted.double.btldr",
+			"begin": "^\\> ",
+			"end": "$",
+			"patterns": [
+				{
+					"name": "entity.name.type.class.btldr",
+					"match": "\\b(Aliases|See also|More information):"
+				},
+				{
+					"name": "entity.name.type.class.btldr",
+					"match": "\\bhttps://\\S+"
+				}
+			]
+		},
+		"example-description": {
+			"name": "string.quoted.double.btldr",
+			"begin": "^- ",
+			"end": "$",
+			"patterns": [
+				{
+					"name": "entity.name.type.class.btldr",
+					"begin": "\\[",
+					"end": "\\]",
+					"patterns": [
+						{
+							"name": "constant.character.escape.btldr",
+							"match": "\\\\[\\[\\]]"
+						}
+					]
+				},
+				{
+					"name": "entity.name.type.class.btldr",
+					"match": "\\bstd(in|out|err)\\b"
+				}
+			]
+		},
+		"example-code": {
+			"name": "comment.line.number-sign.btldr",
+			"begin": "^`",
+			"end": "`$",
+			"patterns": [
+				{
+					"name": "keyword.operator.btldr",
+					"begin": "\\{",
+					"end": "\\}",
+					"patterns": [
+						{
+							"name": "keyword.control.operator.btldr",
+							"match": "/\\??"
+						},
+						{
+							"name": "entity.name.type.class.btldr",
+							"match": "\\b(bool|int|float|char|string|command|file|directory|path|any)\\b"
+						},
+						{
+							"name": "constant.character.escape.btldr",
+							"match": "\\\\[{}]"
+						}
+					]
 				}
 			]
 		}
